@@ -125,7 +125,7 @@ function sport_registration(){
         'menu_icon'           => 'dashicons-id', 
         'hierarchical'        => false,
         'supports'            => array('title'),
-        'has_archive' => true,
+        'has_archive' => false
     ]);
 
     register_post_type('services', [
@@ -148,7 +148,7 @@ function sport_registration(){
         'menu_icon'           => 'dashicons-smiley', 
         'hierarchical'        => false,
         'supports'            => array('title'),
-        'has_archive' => true,
+        'has_archive' => true
     ]);
 
     register_post_type('trainers', [
@@ -171,12 +171,12 @@ function sport_registration(){
         'menu_icon'           => 'dashicons-groups', 
         'hierarchical'        => false,
         'supports'            => array('title'),
-        'has_archive' => true,
+        'has_archive' => true
     ]);
 
     register_post_type('schedule', [
         'labels' => [
-            'name'               => 'Занятие', // основное название для типа записи
+            'name'               => 'Расписание', // основное название для типа записи
             'singular_name'      => 'Занятие', // название для одной записи этого типа
             'add_new'            => 'Добавить новое занятие', // для добавления новой записи
             'add_new_item'       => 'Добавить новое занятие', // заголовка у вновь создаваемой записи в админ-панели.
@@ -194,7 +194,7 @@ function sport_registration(){
         'menu_icon'           => 'dashicons-calendar-alt', 
         'hierarchical'        => false,
         'supports'            => array('title'),
-        'has_archive' => true,
+        'has_archive' => true
     ]);
 
     register_taxonomy('days', ['schedule'], [
@@ -271,7 +271,7 @@ function sport_registration(){
         'menu_icon'           => 'dashicons-list-view', 
         'hierarchical'        => false,
         'supports'            => array('title'),
-        'has_archive' => true,
+        'has_archive' => true
     ]);
 }
 
