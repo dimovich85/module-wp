@@ -3,7 +3,7 @@
 add_action('wp_enqueue_scripts', 'sport_scripts');
 add_action('after_setup_theme', 'sport_setup');
 add_action('widgets_init', 'sport_widgets');
-//add_action('init', 'sport_registration');
+add_action('init', 'sport_registration');
 
 add_filter('show_admin_bar', '__return_false');
 
@@ -101,6 +101,177 @@ function sport_widgets(){
         'description' => 'Зона на странице с контактами, куда выводится мелкие виджеты с информацией',
         'before_widget' => null,
         'after_widget' => null
+    ]);
+}
+
+function sport_registration(){
+    register_post_type('cards', [
+        'labels' => [
+            'name'               => 'Клубные карты', // основное название для типа записи
+            'singular_name'      => 'Клубная карта', // название для одной записи этого типа
+            'add_new'            => 'Добавить новую карту', // для добавления новой записи
+            'add_new_item'       => 'Добавить новую карту', // заголовка у вновь создаваемой записи в админ-панели.
+            'edit_item'          => 'Редактировать карту', // для редактирования типа записи
+            'new_item'           => 'Новая карта', // текст новой записи
+            'view_item'          => 'Смотреть карту', // для просмотра записи этого типа.
+            'search_items'       => 'Искать', // для поиска по этим типам записи
+            'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+            'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+            'parent_item_colon'  => '', // для родителей (у древовидных типов)
+            'menu_name'          => 'Клубные карты', // название меню
+        ],
+        'public'              => true,
+        'menu_position'       => 20,
+        'menu_icon'           => 'dashicons-id', 
+        'hierarchical'        => false,
+        'supports'            => array('title'),
+        'has_archive' => true,
+    ]);
+
+    register_post_type('services', [
+        'labels' => [
+            'name'               => 'Услуги', // основное название для типа записи
+            'singular_name'      => 'Услуга', // название для одной записи этого типа
+            'add_new'            => 'Добавить новую услугу', // для добавления новой записи
+            'add_new_item'       => 'Добавить новую услугу', // заголовка у вновь создаваемой записи в админ-панели.
+            'edit_item'          => 'Редактировать услугу', // для редактирования типа записи
+            'new_item'           => 'Новая услуга', // текст новой записи
+            'view_item'          => 'Смотреть услугу', // для просмотра записи этого типа.
+            'search_items'       => 'Искать', // для поиска по этим типам записи
+            'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+            'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+            'parent_item_colon'  => '', // для родителей (у древовидных типов)
+            'menu_name'          => 'Услуги', // название меню
+        ],
+        'public'              => true,
+        'menu_position'       => 20,
+        'menu_icon'           => 'dashicons-smiley', 
+        'hierarchical'        => false,
+        'supports'            => array('title'),
+        'has_archive' => true,
+    ]);
+
+    register_post_type('trainers', [
+        'labels' => [
+            'name'               => 'Тренеры', // основное название для типа записи
+            'singular_name'      => 'Тренер', // название для одной записи этого типа
+            'add_new'            => 'Добавить нового тренера', // для добавления новой записи
+            'add_new_item'       => 'Добавить нового тренера', // заголовка у вновь создаваемой записи в админ-панели.
+            'edit_item'          => 'Редактировать тренера', // для редактирования типа записи
+            'new_item'           => 'Новый тренера', // текст новой записи
+            'view_item'          => 'Смотреть тренера', // для просмотра записи этого типа.
+            'search_items'       => 'Искать', // для поиска по этим типам записи
+            'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+            'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+            'parent_item_colon'  => '', // для родителей (у древовидных типов)
+            'menu_name'          => 'Тренеры', // название меню
+        ],
+        'public'              => true,
+        'menu_position'       => 20,
+        'menu_icon'           => 'dashicons-groups', 
+        'hierarchical'        => false,
+        'supports'            => array('title'),
+        'has_archive' => true,
+    ]);
+
+    register_post_type('schedule', [
+        'labels' => [
+            'name'               => 'Занятие', // основное название для типа записи
+            'singular_name'      => 'Занятие', // название для одной записи этого типа
+            'add_new'            => 'Добавить новое занятие', // для добавления новой записи
+            'add_new_item'       => 'Добавить новое занятие', // заголовка у вновь создаваемой записи в админ-панели.
+            'edit_item'          => 'Редактировать занятие', // для редактирования типа записи
+            'new_item'           => 'Новое занятие', // текст новой записи
+            'view_item'          => 'Смотреть занятие', // для просмотра записи этого типа.
+            'search_items'       => 'Искать', // для поиска по этим типам записи
+            'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+            'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+            'parent_item_colon'  => '', // для родителей (у древовидных типов)
+            'menu_name'          => 'Занятия и расписание', // название меню
+        ],
+        'public'              => true,
+        'menu_position'       => 20,
+        'menu_icon'           => 'dashicons-calendar-alt', 
+        'hierarchical'        => false,
+        'supports'            => array('title'),
+        'has_archive' => true,
+    ]);
+
+    register_taxonomy('days', ['schedule'], [
+        'labels'                => [
+            'name'              => 'Дни недели',
+            'singular_name'     => 'День недели',
+            'search_items'      => 'Найти день недели',
+            'all_items'         => 'Все дни недели',
+            'view_item '        => 'Посмотреть день недели',
+            'edit_item'         => 'Редактировать день недели',
+            'update_item'       => 'Обновить',
+            'add_new_item'      => 'Добавить день недели',
+            'new_item_name'     => 'Добавить день недели',
+            'menu_name'         => 'Все дни недели',
+        ],
+        'description'           => '',
+        'public'                => true,
+        'hierarchical'          => true
+    ]);
+
+    register_taxonomy('days', ['schedule'], [
+        'labels'                => [
+            'name'              => 'Дни недели',
+            'singular_name'     => 'День недели',
+            'search_items'      => 'Найти день недели',
+            'all_items'         => 'Все дни недели',
+            'view_item '        => 'Посмотреть день недели',
+            'edit_item'         => 'Редактировать день недели',
+            'update_item'       => 'Обновить',
+            'add_new_item'      => 'Добавить день недели',
+            'new_item_name'     => 'Добавить день недели',
+            'menu_name'         => 'Все дни недели',
+        ],
+        'description'           => '',
+        'public'                => true,
+        'hierarchical'          => true
+    ]);
+
+    register_taxonomy('places', ['schedule'], [
+        'labels'                => [
+            'name'              => 'Залы',
+            'singular_name'     => 'Зал',
+            'search_items'      => 'Найти зал',
+            'all_items'         => 'Все залы',
+            'view_item '        => 'Посмотреть зал',
+            'edit_item'         => 'Редактировать зал',
+            'update_item'       => 'Обновить',
+            'add_new_item'      => 'Добавить зал',
+            'new_item_name'     => 'Добавить зал',
+            'menu_name'         => 'Все залы',
+        ],
+        'description'           => '',
+        'public'                => true,
+        'hierarchical'          => true
+    ]);
+
+    register_post_type('prices', [
+        'labels' => [
+            'name'               => 'Прайсы', // основное название для типа записи
+            'singular_name'      => 'Прайс', // название для одной записи этого типа
+            'add_new'            => 'Добавить новый прайс', // для добавления новой записи
+            'add_new_item'       => 'Добавить новый прайс', // заголовка у вновь создаваемой записи в админ-панели.
+            'edit_item'          => 'Редактировать прайс', // для редактирования типа записи
+            'new_item'           => 'Новый прайс', // текст новой записи
+            'view_item'          => 'Смотреть прайс', // для просмотра записи этого типа.
+            'search_items'       => 'Искать', // для поиска по этим типам записи
+            'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+            'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+            'parent_item_colon'  => '', // для родителей (у древовидных типов)
+            'menu_name'          => 'Прайсы', // название меню
+        ],
+        'public'              => true,
+        'menu_position'       => 20,
+        'menu_icon'           => 'dashicons-list-view', 
+        'hierarchical'        => false,
+        'supports'            => array('title'),
+        'has_archive' => true,
     ]);
 }
 
