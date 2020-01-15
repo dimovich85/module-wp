@@ -1,5 +1,4 @@
 <?php 
-    /* Template Name: Шаблон для главной */
     get_header(); 
 ?>
     <main class="main-content">
