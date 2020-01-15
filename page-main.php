@@ -2,7 +2,7 @@
     /* Template Name: Шаблон для главной */
     get_header(); 
 ?>
-<main class="main-content">
+  <main class="main-content">
       <h1 class="sr-only"> Домашняя страница спортклуба SportIsland. </h1>
       <div class="banner">
         <span class="sr-only">Будь в форме!</span>
