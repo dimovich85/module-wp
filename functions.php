@@ -280,3 +280,34 @@ function _img_url($path){
     echo $base . $path;
 }
 
+function breadcrumbs($home = 'Главная') {
+
+	$path = array_filter(explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)));
+	$base_url = ($_SERVER['HTTPS'] ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+	$breadcrumbs = [
+        [
+            'link' => $base_url,
+            'text' => $home
+        ]
+    ];
+
+	$last = end( array_keys($path) );
+
+	foreach( $path as $x => $crumb ){
+		$title = ucwords(str_replace(array('.php', '_'), Array('', ' '), $crumb));
+		if( $x != $last ){
+			$breadcrumbs[] = [
+                'link' => $base_url.$crumb,
+                'text' => $title
+            ];
+		}
+		else {
+			$breadcrumbs[] = [
+                'link' => '',
+                'text' => $title
+            ];
+		}
+	}
+
+	return  $breadcrumbs;
+}

@@ -3,14 +3,9 @@
     <main class="main-content">
       <h1 class="sr-only">Услуги</h1>
       <div class="wrapper">
-        <ul class="breadcrumbs">
-          <li class="breadcrumbs__item breadcrumbs__item_home">
-            <a href="index.html" class="breadcrumbs__link">Главная</a>
-          </li>
-          <li class="breadcrumbs__item">
-            <a href="services.html" class="breadcrumbs__link">Услуги</a>
-          </li>
-        </ul>
+      <?php 
+        get_template_part('tmp/breadcrumbs'); 
+      ?>
         <ul class="services-list">
           <li class="services-list__item service">
             <h2 class="service__name main-heading"> ТРЕНАЖЕРНЫЙ ЗАЛ </h2>

@@ -5,14 +5,9 @@
   <main class="main-content">
       <h1 class="sr-only">Страница категорий блога на сайте спорт-клуба SportIsland</h1>
       <div class="wrapper">
-        <ul class="breadcrumbs">
-          <li class="breadcrumbs__item breadcrumbs__item_home">
-            <a href="index.html" class="breadcrumbs__link">Главная</a>
-          </li>
-          <li class="breadcrumbs__item">
-            <a href="blog.html" class="breadcrumbs__link">Блог</a>
-          </li>
-        </ul>
+      <?php 
+        get_template_part('tmp/breadcrumbs'); 
+      ?>
       </div>
       <section class="last-posts">
         <div class="wrapper">
@@ -76,20 +71,9 @@
 ?>
   <main class="main-content">
     <div class="wrapper">
-      <ul class="breadcrumbs">
-        <li class="breadcrumbs__item breadcrumbs__item_home">
-          <a href="index.html" class="breadcrumbs__link">Главная</a>
-        </li>
-        <li class="breadcrumbs__item">
-          <a href="blog.html" class="breadcrumbs__link">Блог</a>
-        </li>
-        <li class="breadcrumbs__item">
-          <a href="category.html" class="breadcrumbs__link">Кардио</a>
-        </li>
-        <li class="breadcrumbs__item">
-          <a href="single.html" class="breadcrumbs__link">Рельефный пресс</a>
-        </li>
-      </ul>
+    <?php 
+      get_template_part('tmp/breadcrumbs'); 
+    ?>
     </div>
     <article class="main-article wrapper">
       <header class="main-article__header">
