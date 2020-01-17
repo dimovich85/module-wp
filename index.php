@@ -60,7 +60,7 @@
           <li class="category">
             <a href="<?php echo $cat_link; ?>" class="category__link">
               <img 
-                src="<?php echo $img; ?>" 
+                src="<?php echo $url; ?>" 
                 alt="Категория <?php echo $cat->name; echo ' '.$alt; ?>" 
                 class="category__thumb"
               >
