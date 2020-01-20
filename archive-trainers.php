@@ -32,26 +32,6 @@
               </article>
             </li>
           <?php endwhile; ?>
-            <!-- <li class="trainers-list__item">
-              <article class="trainer">
-                <img src="<?php _img_url('img/trainers__trainer_pic2.png'); ?>" alt="" class="trainer__thumb">
-                <div class="trainer__wrap">
-                  <h2 class="trainer__name"> Юзвак Дмитрий </h2>
-                  <p class="trainer__text"> Хореограф. Преподаватель Dance Mix, Twerk, Strip dance и др направлений. Официальный представитель UBPF. Чемпионка Европы по фитнес Бикини. Тренер по дефиле. Персональный тренер тренажерного зала. </p>
-                </div>
-                <a href="#" class="trainer__subscribe btn">записаться</a>
-              </article>
-            </li>
-            <li class="trainers-list__item">
-              <article class="trainer">
-                <img src="<?php _img_url('img/trainers__trainer_pic3.png'); ?>" alt="" class="trainer__thumb">
-                <div class="trainer__wrap">
-                  <h2 class="trainer__name"> Рудь Валерий </h2>
-                  <p class="trainer__text"> Персональный тренер. МСМК по пауерлифтингу, неоднократный победитель соревнований. </p>
-                </div>
-                <a href="#" class="trainer__subscribe btn">записаться</a>
-              </article>
-            </li> -->
           </ul>
         <?php
           else:
