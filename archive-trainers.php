@@ -9,18 +9,30 @@
       <section class="trainers">
         <div class="wrapper">
           <h1 class="main-heading trainers__h">Тренеры</h1>
+        <?php
+          if( have_posts() ):
+        ?>
           <ul class="trainers-list">
+          <?php
+            while( have_posts() ):
+              the_post();
+          ?>
             <li class="trainers-list__item">
               <article class="trainer">
-                <img src="<?php _img_url('img/trainers__trainer_pic1.png'); ?>" alt="" class="trainer__thumb">
+                <img src="<?php the_field('trainer_photo'); ?>" alt="Фотография тренера - <?php the_field('trainer_name'); ?>" class="trainer__thumb">
                 <div class="trainer__wrap">
-                  <h2 class="trainer__name"> Комзова Ольга </h2>
-                  <p class="trainer__text"> Сертифицированный специалист по Пилатесу (Matwork, Ring, Ball, miniball) и ZUMBA, ZUMBA by strong. </p>
+                  <h2 class="trainer__name">
+                    <?php the_field('trainer_name'); ?>
+                  </h2>
+                  <p class="trainer__text">
+                  <?php the_field('trainer_description'); ?>
+                  </p>
                 </div>
                 <a href="#" class="trainer__subscribe btn">записаться</a>
               </article>
             </li>
-            <li class="trainers-list__item">
+          <?php endwhile; ?>
+            <!-- <li class="trainers-list__item">
               <article class="trainer">
                 <img src="<?php _img_url('img/trainers__trainer_pic2.png'); ?>" alt="" class="trainer__thumb">
                 <div class="trainer__wrap">
@@ -39,8 +51,13 @@
                 </div>
                 <a href="#" class="trainer__subscribe btn">записаться</a>
               </article>
-            </li>
+            </li> -->
           </ul>
+        <?php
+          else:
+            get_template_part( 'tmp/no_posts' );
+          endif;
+        ?>
         </div>
       </section>
     </main>
