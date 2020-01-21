@@ -20,6 +20,13 @@
           </figure>
         </div>
       </article>
+      <?php
+        $sales = get_posts([
+          'post_type'   => 'sales',
+          'numberposts' => -1
+        ]);
+        if( $sales ):
+      ?>
       <section class="sales">
         <div class="wrapper">
           <header class="sales__header">
@@ -34,71 +41,96 @@
             </p>
           </header>
           <div class="sales__slider slider">
+          <?php
+            global $post;
+            foreach($sales as $post):
+              setup_postdata( $sale );
+          ?>
             <section class="slider__slide stock">
-              <a href="blog.html" class="stock__link" aria-label="Подробнее об акции скидка 20% на групповые занятия">
-                <img src="<?php _img_url('img/index__sales_pic1.jpg');?>" alt="" class="stock__thumb">
-                <h3 class="stock__h"> Групповые занятия 20% скидка </h3>
-                <p class="stock__text"> Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке. </p>
+              <a 
+                href="<?php the_field('sales_article_link'); ?>" 
+                class="stock__link" 
+                aria-label="Подробнее об акции <?php the_field('sales_name'); ?>"
+              >
+                <img 
+                  src="<?php echo get_field('sales_thumb')['url']; ?>" 
+                  alt="<?php echo get_field('sales_thumb')['alt']; ?>" 
+                  class="stock__thumb"
+                >
+                <h3 class="stock__h">
+                  <?php the_field('sales_name'); ?>
+                </h3>
+                <p class="stock__text">
+                  <?php the_field('sales_description'); ?>
+                </p>
                 <span class="stock__more link-more_inverse link-more">Подробнее</span>
               </a>
             </section>
-            <section class="slider__slide stock">
-              <a href="blog.html" class="stock__link" aria-label="Подробнее об акции Скидка 30% на занятия с тренером">
-                <img src="<?php _img_url('img/index__sales_pic2.jpg');?>" alt="" class="stock__thumb">
-                <h3 class="stock__h"> Скидка 30% на занятия с тренером </h3>
-                <p class="stock__text"> Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке. </p>
-                <span class="stock__more  link-more_inverse link-more">Подробнее</span>
-              </a>
-            </section>
+          <?php 
+            endforeach;
+            wp_reset_postdata();
+          ?>
           </div>
         </div>
       </section>
+      <?php 
+        endif;
+        $cards = get_posts([
+          'post_type'   => 'cards',
+          'numberposts' => -1,
+          'meta_key' => 'cards_position',
+          'order_by' => 'meta_value',
+          'order' => 'DESC'
+        ]);
+        if( $cards ):
+      ?>      
       <section class="cards cards_index">
         <div class="wrapper">
           <h2 class="main-heading cards__h"> клубные карты </h2>
           <ul class="cards__list row">
-            <li class="card">
-              <h3 class="card__name"> полный день </h3>
-              <p class="card__time"> 7:00 &ndash; 22:00 </p>
-              <p class="card__price price"> 3200 <span class="price__unit">р.-/мес.</span>
+          <?php
+            global $post;
+            foreach( $cards as $post ):
+              setup_postdata( $post );
+              $bg = get_field('cards_bg') ? get_field('cards_bg') : '';
+              $profit = get_field('cards_profitable') ? ' card_profitable' : '';
+          ?>
+            <li 
+              class="card<?php echo $profit; ?>"
+              style="<?php echo $bg; ?>"
+            >
+              <h3 class="card__name">
+                <?php the_field('cards_name'); ?>
+              </h3>
+              <p class="card__time">
+                <?php the_field('cards_time_start'); ?>
+                 &ndash;
+                 <?php the_field('cards_time_end'); ?> 
+              </p>
+              <p class="card__price price">
+                <?php the_field('cards_price'); ?>
+                <span class="price__unit">р.-/мес.</span>
               </p>
               <ul class="card__features">
-                <li class="card__feature">Безлимит посещений клуба</li>
-                <li class="card__feature">Вводный инструктаж</li>
-                <li class="card__feature">Групповые занятия</li>
-                <li class="card__feature">Сауна</li>
+              <?php
+                $benefits = explode("\n", get_field('cards_benefits'));
+                foreach( $benefits as $item ):
+              ?>
+                <li class="card__feature">
+                  <?php echo $item; ?>
+                </li>
+                <?php endforeach; ?>
               </ul>
               <a href="#" class="card__buy btn">купить</a>
             </li>
-            <li class="card card_profitable">
-              <h3 class="card__name"> полный день </h3>
-              <p class="card__time"> 7:00 &ndash; 22:00 </p>
-              <p class="card__price price"> 3200 <span class="price__unit">р.-/мес.</span>
-              </p>
-              <ul class="card__features">
-                <li class="card__feature">Безлимит посещений клуба</li>
-                <li class="card__feature">Вводный инструктаж</li>
-                <li class="card__feature">Групповые занятия</li>
-                <li class="card__feature">Сауна</li>
-              </ul>
-              <a href="#" class="card__buy btn">купить</a>
-            </li>
-            <li class="card">
-              <h3 class="card__name"> полный день </h3>
-              <p class="card__time"> 7:00 &ndash; 22:00 </p>
-              <p class="card__price price"> 3200 <span class=" price__unit">р.-/мес.</span>
-              </p>
-              <ul class="card__features">
-                <li class="card__feature">Безлимит посещений клуба</li>
-                <li class="card__feature">Вводный инструктаж</li>
-                <li class="card__feature">Групповые занятия</li>
-                <li class="card__feature">Сауна</li>
-              </ul>
-              <a href="#" class="card__buy btn">купить</a>
-            </li>
+          <?php
+            endforeach;
+            wp_reset_postdata();
+          ?>
           </ul>
         </div>
       </section>
+      <?php endif; ?>
     </main>
 
 <?php get_footer(); ?>
