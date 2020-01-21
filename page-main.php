@@ -6,7 +6,7 @@
       <h1 class="sr-only"> Домашняя страница спортклуба SportIsland. </h1>
       <div class="banner">
         <span class="sr-only">Будь в форме!</span>
-        <a href="trainers.html" class="banner__link btn">записаться</a>
+        <a href="<?php echo get_post_type_archive_link( 'trainers' ); ?>" class="banner__link btn">записаться</a>
       </div>
       <article class="about">
         <div class="wrapper about__flex">
