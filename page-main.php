@@ -11,21 +11,9 @@
       <?php
         if( is_active_sidebar( 'main_about_us' ) ){
           dynamic_sidebar( 'main_about_us' );
-        }      
-      ?>
-      <!-- <article class="about">
-        <div class="wrapper about__flex">
-          <div class="about__wrap">
-            <h2 class="main-heading about__h"> кто мы такие </h2>
-            <p class="about__text"> Спортивный клуб SPORTISLAND существует уже более 5 лет. За это время большое количество посетителей получили положительный результат от своих тренировок. Мы предлагаем посещать просторный и укомплектованный тренажерный зал с персональными тренерами, массаж, групповые занятия (фитнес), занятия единоборствами в группах и индивидуально, и большое количество тренировок для детей. В каждый абонемент входит посещение финской сауны </p>
-            <a href="blog.html" class="about__link btn">подробнее</a>
-          </div>
-          <figure class="about__thumb">
-            <img src="<?php _img_url('img/index__about_img.jpg'); ?>" alt="Power lifter">
-          </figure>
-        </div>
-      </article> -->
-      <?php
+        }
+
+        
         $sales = get_posts([
           'post_type'   => 'sales',
           'numberposts' => -1
