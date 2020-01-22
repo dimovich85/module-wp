@@ -1,13 +1,13 @@
 <?php 
 
-class Simple_Text extends WP_Widget {
+class SI_Simple_Text extends WP_Widget {
 
 	public function __construct(){
 		$args = array(
-			'name' => 'SportIsland - Text',
+			'name' => 'SportIsland - Текст',
 			'description' => 'Выводит простой текст'
 		);
-		parent::__construct('simple_text', '', $args);
+		parent::__construct('si_simple_text', '', $args);
 	}
 
 	public function form($instance){

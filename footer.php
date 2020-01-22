@@ -1,22 +1,25 @@
 <div class="footer">
       <header class="main-header">
         <div class="wrapper main-header__wrap">
-            <?php the_custom_logo(); ?>
+          <?php the_custom_logo(); ?>
           <?php 
-          wp_nav_menu( [
-            'theme_location'  => 'menu-footer',
-            'container'       => 'nav', 
-            'container_class' => 'main-navigation', 
-            'menu_class'      => 'main-navigation__list',
-            'echo'            => true,
-            'items_wrap'      => '<ul class="%2$s">%3$s</ul>',
-            'depth'           => 0
-          ] ); 
-        ?>
-          <address class="main-header__widget widget-contacts">
-            <a href="tel:88007003030" class="widget-contacts__phone"> 8 800 700 30 30 </a>
-            <p class="widget-contacts__address"> ул. Приречная 11 </p>
-          </address>
+            wp_nav_menu( [
+              'theme_location'  => 'menu-footer',
+              'container'       => 'nav', 
+              'container_class' => 'main-navigation', 
+              'menu_class'      => 'main-navigation__list',
+              'echo'            => true,
+              'items_wrap'      => '<ul class="%2$s">%3$s</ul>',
+              'depth'           => 0
+            ] ); 
+          ?>
+          <div class="main-header__widget">
+            <?php
+              if( is_active_sidebar( 'header' ) ){
+                dynamic_sidebar( 'header' );
+              }
+            ?>
+          </div>
         </div>
       </header>
       <footer class="main-footer wrapper">

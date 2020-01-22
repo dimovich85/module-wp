@@ -33,9 +33,12 @@
             'depth'           => 0
           ] ); 
         ?>
-        <address class="main-header__widget widget-contacts">
-          <a href="tel:88007003030" class="widget-contacts__phone"> 8 800 700 30 30 </a>
-          <p class="widget-contacts__address"> ул. Приречная 11 </p>
-        </address>
+        <div class="main-header__widget">
+          <?php
+            if( is_active_sidebar( 'header' ) ){
+              dynamic_sidebar( 'header' );
+            }
+          ?>
+        </div>
       </div>
     </header>
