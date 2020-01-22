@@ -1,5 +1,7 @@
 <?php
 
+include_once(__DIR__.'/inc/widget-text.php');
+
 add_action('wp_enqueue_scripts', 'sport_scripts');
 add_action('after_setup_theme', 'sport_setup');
 add_action('widgets_init', 'sport_widgets');
@@ -102,6 +104,8 @@ function sport_widgets(){
         'before_widget' => null,
         'after_widget' => null
     ]);
+
+    register_widget( 'simple_text' );
 }
 
 function sport_registration(){
