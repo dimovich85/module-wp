@@ -2,6 +2,7 @@
 
 include_once(__DIR__.'/inc/widget-text.php');
 include_once(__DIR__.'/inc/widget-contacts.php');
+include_once(__DIR__.'/inc/widget-iframe.php');
 
 add_action('wp_enqueue_scripts', 'sport_scripts');
 add_action('after_setup_theme', 'sport_setup');
@@ -27,9 +28,9 @@ function sport_setup(){
 
 function sport_widgets(){
     register_sidebar([
-        'name' => 'Шапка',
+        'name' => 'Шапка и подвал. Контакты',
         'id' => 'header',
-        'description' => 'Сайдбар в шапке для контактов',
+        'description' => 'Сайдбар в шапке и футере для контактов',
         'before_widget' => null,
         'after_widget' => null
     ]);
@@ -38,14 +39,6 @@ function sport_widgets(){
         'name' => 'Главная страница - Блок Кто мы',
         'id' => 'main_about_us',
         'description' => 'Блок "Кто мы" на главной странице',
-        'before_widget' => null,
-        'after_widget' => null
-    ]);
-
-    register_sidebar([
-        'name' => 'Подвал - Контакты',
-        'id' => 'footer',
-        'description' => 'Зона в подвале, для виджетов с контактами, которая дублрует шапку',
         'before_widget' => null,
         'after_widget' => null
     ]);
@@ -91,14 +84,6 @@ function sport_widgets(){
     ]);
 
     register_sidebar([
-        'name' => 'Контакты - Карта',
-        'id' => 'contacts_map',
-        'description' => 'Зона на странице с контактами, куда выводится карта',
-        'before_widget' => null,
-        'after_widget' => null
-    ]);
-
-    register_sidebar([
         'name' => 'Контакты - виджеты под картой',
         'id' => 'contacts_widgets',
         'description' => 'Зона на странице с контактами, куда выводится мелкие виджеты с информацией',
@@ -108,6 +93,7 @@ function sport_widgets(){
 
     register_widget( 'si_simple_text' );
     register_widget( 'si_widget_contacts' );
+    register_widget( 'si_widget_iframe' );
 }
 
 function sport_registration(){
