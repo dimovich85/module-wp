@@ -1,8 +1,16 @@
 <?php
 
-include_once(__DIR__.'/inc/widget-text.php');
-include_once(__DIR__.'/inc/widget-contacts.php');
-include_once(__DIR__.'/inc/widget-iframe.php');
+$includes = [
+    'widget-text',
+    'widget-contacts',
+    'widget-iframe',
+    'widget-articles'
+];
+
+foreach( $includes as $inc ){
+    include_once(__DIR__.'/inc/'.$inc.'.php');
+}
+
 
 add_action('wp_enqueue_scripts', 'sport_scripts');
 add_action('after_setup_theme', 'sport_setup');
@@ -94,6 +102,7 @@ function sport_widgets(){
     register_widget( 'si_simple_text' );
     register_widget( 'si_widget_contacts' );
     register_widget( 'si_widget_iframe' );
+    register_widget( 'si_widget_article' );
 }
 
 function sport_registration(){

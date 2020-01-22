@@ -8,7 +8,12 @@
         <span class="sr-only">Будь в форме!</span>
         <a href="<?php echo get_post_type_archive_link( 'trainers' ); ?>" class="banner__link btn">записаться</a>
       </div>
-      <article class="about">
+      <?php
+        if( is_active_sidebar( 'main_about_us' ) ){
+          dynamic_sidebar( 'main_about_us' );
+        }      
+      ?>
+      <!-- <article class="about">
         <div class="wrapper about__flex">
           <div class="about__wrap">
             <h2 class="main-heading about__h"> кто мы такие </h2>
@@ -19,7 +24,7 @@
             <img src="<?php _img_url('img/index__about_img.jpg'); ?>" alt="Power lifter">
           </figure>
         </div>
-      </article>
+      </article> -->
       <?php
         $sales = get_posts([
           'post_type'   => 'sales',
