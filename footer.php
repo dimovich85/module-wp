@@ -49,17 +49,11 @@
             </p>
           </div>
           <div class="main-footer__widget main-footer__widget_social">
-            <a href="#" class="widget-social-links fb">
-              <span class="sr-only"> Мы в Facebook! </span>
-            </a>
-            <a href="#" class="widget-social-links vk">
-              <span class="sr-only"> Мы в VK! </span>
-            </a>
-            <a href="#" class="widget-social-links youtube">
-              <span class="sr-only"> Мы в YouTube! </span>
-            </a>
-            <a href="#" class="widget-social-links insta">
-              <span class="sr-only"> Мы в Instagram! </span>
+            <?php
+              if( is_active_sidebar( 'footer_column3' ) ){
+                dynamic_sidebar( 'footer_column3' );
+              }
+            ?>
             </a>
           </div>
         </div>
