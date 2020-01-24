@@ -12,7 +12,6 @@
         if( is_active_sidebar( 'main_about_us' ) ){
           dynamic_sidebar( 'main_about_us' );
         }
-
         
         $sales = get_posts([
           'post_type'   => 'sales',

@@ -15,7 +15,7 @@ class SI_Simple_Text extends WP_Widget {
 		?>
 <!-- Верстка формы -->
 	<p>
-		<label for="<?php echo $this->get_field_id('id-text'); ?>">Text:</label>
+		<label for="<?php echo $this->get_field_id('id-text'); ?>">Текст:</label>
 		<textarea name="<?php echo $this->get_field_name('text'); ?>" id="<?php echo $this->get_field_id('id-text'); ?>" value="<?php echo $instance['text']; ?>" class="widefat"><?php echo $instance['text']; ?></textarea>
 	</p>
 <!-- Конец верстки формы -->
@@ -24,7 +24,7 @@ class SI_Simple_Text extends WP_Widget {
 	} //Конец метода form
 
 	public function widget($args, $instance){
-		echo $instance['text'];
+		echo apply_filters('widget_text', $instance['text'] );
 	}
 
 	/*public function update(){

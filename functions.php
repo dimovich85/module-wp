@@ -17,7 +17,10 @@ add_action('after_setup_theme', 'sport_setup');
 add_action('widgets_init', 'sport_widgets');
 add_action('init', 'sport_registration');
 
+add_shortcode( 'si_paste_link', 'sport_paste_link' );
+
 add_filter('show_admin_bar', '__return_false');
+add_filter('widget_text', 'do_shortcode');
 
 function sport_scripts(){
     wp_enqueue_style('styles', get_template_directory_uri() . '/assets/css/styles.css', [], '1.0.0', 'all');
@@ -334,4 +337,15 @@ function breadcrumbs($home = 'Главная') {
 	}
 
 	return  $breadcrumbs;
+}
+
+function sport_paste_link( $attrs ){
+    $params = shortcode_atts( [
+        "link" => '',
+        'text' => ''
+    ], $attrs);
+    $link = $params['link'];
+    $text = isset($params['text']) ? $params['text'] : $link;
+    if( $link ) return "<a href=\"${link}\">${text}</a>";
+    else return '';
 }
