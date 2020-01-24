@@ -1,7 +1,12 @@
 <div class="footer">
       <header class="main-header">
         <div class="wrapper main-header__wrap">
-          <?php the_custom_logo(); ?>
+          <p class="main-header__logolink">
+            <?php the_custom_logo(); ?>
+            <span class="slogan">
+              <?php echo get_option('si_settings_field_slogan'); ?>
+            </span>
+          </p>
           <?php 
             wp_nav_menu( [
               'theme_location'  => 'menu-footer',

@@ -16,6 +16,7 @@ add_action('wp_enqueue_scripts', 'sport_scripts');
 add_action('after_setup_theme', 'sport_setup');
 add_action('widgets_init', 'sport_widgets');
 add_action('init', 'sport_registration');
+add_action( 'admin_init', 'sport_settings_fields' );
 
 add_shortcode( 'si_paste_link', 'sport_paste_link' );
 
@@ -349,3 +350,25 @@ function sport_paste_link( $attrs ){
     if( $link ) return "<a href=\"${link}\">${text}</a>";
     else return '';
 }
+
+function sport_settings_fields(){
+    add_settings_field( 
+        'si_settings_field_slogan', 
+        'Напишите слоган для SportIsland', 
+        'si_settings_field_slogan_cb', 
+        'general', 
+        'default', 
+        ['label_for' => 'si_settings_field_slogan'] 
+    );
+    register_setting( 'general', 'si_settings_field_slogan', 'strval' );
+}
+
+function si_settings_field_slogan_cb(){
+?>
+    <input 
+        id="si_settings_field_slogan" 
+        name="si_settings_field_slogan" 
+        type="text" class="regular-text code" 
+        value="<?php echo get_option( 'si_settings_field_slogan' ); ?>"
+    >
+<?php }
