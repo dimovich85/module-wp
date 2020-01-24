@@ -5,7 +5,8 @@ $includes = [
     'widget-contacts',
     'widget-iframe',
     'widget-articles',
-    'widget-social-links'
+    'widget-social-links',
+    'widget-info'
 ];
 
 foreach( $includes as $inc ){
@@ -109,6 +110,7 @@ function sport_widgets(){
     register_widget( 'si_widget_iframe' );
     register_widget( 'si_widget_article' );
     register_widget( 'si_social_links' );
+    register_widget( 'si_widget_info' );
 }
 
 function sport_registration(){
