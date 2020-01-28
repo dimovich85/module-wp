@@ -113,7 +113,7 @@
                 </li>
                 <?php endforeach; ?>
               </ul>
-              <a href="#" class="card__buy btn">купить</a>
+              <a href="#modal-form" class="card__buy btn btn_modal">купить</a>
             </li>
           <?php
             endforeach;
