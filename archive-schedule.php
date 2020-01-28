@@ -46,7 +46,7 @@
               ]);
               if( $index === 0 ):
           ?>
-            <li class="tabs-content__item active-tab">
+            <li class="tabs-content__item active-tab" id="<?php echo $day->slug; ?>">
               <?php else: ?>
             <li class="tabs-content__item" id="<?php echo $day->slug; ?>">
               <?php endif; ?>
@@ -54,7 +54,7 @@
                 <thead class="sr-only">
                   <tr>
                     <td colspan="4">
-                      <span class="sr-only"> Понедельник </span>
+                      <span class="sr-only"><?php echo $day->description; ?></span>
                     </td>
                   </tr>
                 </thead>
