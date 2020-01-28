@@ -72,7 +72,7 @@
           'numberposts' => -1,
           'meta_key' => 'cards_position',
           'order_by' => 'meta_value',
-          'order' => 'DESC'
+          'order' => 'ASC'
         ]);
         if( $cards ):
       ?>      

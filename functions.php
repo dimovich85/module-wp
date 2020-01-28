@@ -247,6 +247,7 @@ function sport_registration(){
         'hierarchical'          => true
     ]);
 
+    // should be schedule_days
     register_taxonomy('days', ['schedule'], [
         'labels'                => [
             'name'              => 'Дни недели',

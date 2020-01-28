@@ -8,30 +8,48 @@
         <h1 class="main-heading schedule-page__h">расписание</h1>
         <div class="tabs">
           <ul class="tabs-btns">
+          <?php
+            $days = get_terms([
+              'taxonomy' => 'days',
+              'orderby' => 'slug',
+              'order' => 'ASC'
+            ]);
+            $index = 0;
+            foreach($days as $day):
+              if( $index === 0 ):
+          ?>
             <li class="tabs-btns__item active-tab">
-              <a href="#mon" class="tabs-btns__btn"> Пн </a>
-            </li>
+              <?php else: ?>
             <li class="tabs-btns__item">
-              <a href="#tue" class="tabs-btns__btn"> Вт </a>
+              <?php endif; ?>
+              <a 
+                href="#<?php echo $day->slug; ?>" 
+                class="tabs-btns__btn"
+                aria-label="<?php echo $day->description; ?>"
+              > 
+                <?php echo $day->name; ?>              
+              </a>
             </li>
-            <li class="tabs-btns__item">
-              <a href="#wed" class="tabs-btns__btn"> Ср </a>
-            </li>
-            <li class="tabs-btns__item">
-              <a href="#thur" class="tabs-btns__btn"> Чт </a>
-            </li>
-            <li class="tabs-btns__item">
-              <a href="#fri" class="tabs-btns__btn"> Пт </a>
-            </li>
-            <li class="tabs-btns__item">
-              <a href="#sat" class="tabs-btns__btn"> Сб </a>
-            </li>
-            <li class="tabs-btns__item">
-              <a href="#sun" class="tabs-btns__btn"> Вс </a>
-            </li>
+          <?php $index++; endforeach; ?>
           </ul>
           <ul class="tabs-content">
-            <li class="tabs-content__item">
+          <?php
+            $index = 0;
+            foreach( $days as $day ):
+              $day_desc = $day->description;
+              $content = new WP_Query([
+                'post_type' => 'schedule',
+                'days' => $day->slug,
+                'meta_key' => 'schedule_time_start',
+                'orderby' => 'meta_value',
+                'order' => 'ASC'
+              ]);
+              if( $index === 0 ):
+          ?>
+            <li class="tabs-content__item active-tab">
+              <?php else: ?>
+            <li class="tabs-content__item" id="<?php echo $day->slug; ?>">
+              <?php endif; ?>
               <table class="schedule tabs-content__table">
                 <thead class="sr-only">
                   <tr>
@@ -42,60 +60,35 @@
                 </thead>
                 <tbody>
                   <tr>
+                  <?php
+                    foreach( $content->posts as $activity ):
+                      $data = get_fields( $activity->ID );
+                      $trainer = esc_html(get_the_title($data['schedule_trainer'][0]));
+                      $time = '';
+                      $start = $data['schedule_time_start'];
+                      $end = $data['schedule_time_end'];
+                      $time = $start . ' - ' . $end;
+                      $title = $activity->post_title;
+                      $place = get_the_terms($activity, 'places')[0];
+                      $place_name = $place->name;
+                      $place_color = get_field('places_color', 'places_'.$place->term_id);
+                  ?>
                     <td>
-                      <p class="schedule__time"> 07:00 - 22:00 </p>
-                      <h2 class="schedule__h"> Фитнесс </h2>
-                      <p class="schedule__trainer"> с Литвиненко Ольгой </p>
-                      <p class="schedule__place"> фитнесс зал </p>
+                      <p class="schedule__time"> <?php echo $time; ?> </p>
+                      <h2 class="schedule__h"> <?php echo $title; ?> </h2>
+                      <p class="schedule__trainer"> с <?php echo $trainer; ?> </p>
+                      <p 
+                        class="schedule__place" 
+                        style="color: <?php echo $place_color; ?>;"
+                      > 
+                        <?php echo $place_name; ?> 
+                      </p>
                     </td>
-                    <td>
-                      <p class="schedule__time"> 07:00 - 22:00 </p>
-                      <h2 class="schedule__h"> Фитнесс </h2>
-                      <p class="schedule__trainer"> с Литвиненко Ольгой </p>
-                      <p class="schedule__place"> фитнесс зал </p>
-                    </td>
-                    <td>
-                      <p class="schedule__time"> 07:00 - 22:00 </p>
-                      <h2 class="schedule__h"> Фитнесс </h2>
-                      <p class="schedule__trainer"> с Литвиненко Ольгой </p>
-                      <p class="schedule__place"> фитнесс зал </p>
-                    </td>
-                    <td>
-                      <p class="schedule__time"> 07:00 - 22:00 </p>
-                      <h2 class="schedule__h"> Фитнесс </h2>
-                      <p class="schedule__trainer"> с Литвиненко Ольгой </p>
-                      <p class="schedule__place"> фитнесс зал </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p class="schedule__time"> 07:00 - 22:00 </p>
-                      <h2 class="schedule__h"> Фитнесс </h2>
-                      <p class="schedule__trainer"> с Литвиненко Ольгой </p>
-                      <p class="schedule__place"> фитнесс зал </p>
-                    </td>
-                    <td>
-                      <p class="schedule__time"> 07:00 - 22:00 </p>
-                      <h2 class="schedule__h"> Фитнесс </h2>
-                      <p class="schedule__trainer"> с Литвиненко Ольгой </p>
-                      <p class="schedule__place"> фитнесс зал </p>
-                    </td>
-                    <td>
-                      <p class="schedule__time"> 07:00 - 22:00 </p>
-                      <h2 class="schedule__h"> Фитнесс </h2>
-                      <p class="schedule__trainer"> с Литвиненко Ольгой </p>
-                      <p class="schedule__place"> фитнесс зал </p>
-                    </td>
-                    <td>
-                      <p class="schedule__time"> 07:00 - 22:00 </p>
-                      <h2 class="schedule__h"> Фитнесс </h2>
-                      <p class="schedule__trainer"> с Литвиненко Ольгой </p>
-                      <p class="schedule__place"> фитнесс зал </p>
-                    </td>
-                  </tr>
+                  <?php endforeach; ?>
                 </tbody>
               </table>
             </li>
+          <?php $index++; endforeach; ?>
           </ul>
         </div>
       </div>
