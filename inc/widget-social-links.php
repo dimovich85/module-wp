@@ -10,15 +10,14 @@ class SI_Social_Links extends WP_Widget {
 		parent::__construct('si_social_links', '', $args);
     }
     
-    private $socials;
+    private $socials = [
+        'fb' => 'Facebook',
+        'vk' => 'ВКонтакте',
+        'youtube' => 'YouTube',
+        'insta' => 'Instagram'
+    ];
 
-	public function form($instance){
-        $this->socials = [
-            'fb' => 'Facebook',
-            'vk' => 'ВКонтакте',
-            'youtube' => 'YouTube',
-            'insta' => 'Instagram'
-        ];      
+	public function form($instance){     
 ?>
 <!-- Верстка формы -->
 	<p>
@@ -68,7 +67,7 @@ class SI_Social_Links extends WP_Widget {
       href="<?php echo $state['link']; ?>" 
       class="widget-social-links <?php echo $state['slug']; ?>">
         <span class="sr-only"> 
-            Мы в <?php $this->socials[$state['slug']]; ?>! 
+            Мы в <?php echo $this->socials[$state['slug']]; ?>! 
         </span>
     </a>
 <?php
