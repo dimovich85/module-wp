@@ -22,11 +22,13 @@ add_action( 'admin_init', 'sport_settings_fields' );
 add_action('add_meta_boxes', 'sport_add_likes_box');
 add_action('wp_ajax_metrics', 'si_post_metrics');
 add_action('wp_ajax_nopriv_metrics', 'si_post_metrics');
+add_action('manage_posts_custom_column', 'si_column_views',5,2);
 
 add_shortcode( 'si_paste_link', 'sport_paste_link' );
 
 add_filter('show_admin_bar', '__return_false');
 add_filter('widget_text', 'do_shortcode');
+add_filter('manage_posts_columns', 'si_add_column_views');
 
 function sport_scripts(){
     wp_enqueue_style('styles', get_template_directory_uri() . '/assets/css/styles.css', [], '1.0.0', 'all');
@@ -417,4 +419,16 @@ function si_post_metrics(){
     if( $res ) echo $current_metrics;
     else status_header(500, 'Данные не были обновлены. Попробуйте еще раз.');
     wp_die();
+}
+
+function si_add_column_views($defaults){
+    $defaults['posts_likes'] = 'Likes';
+    return $defaults;
+}
+
+function si_column_views($col_name, $id){
+    $metric = get_post_meta( $id, 'si_likes', true);
+    if($col_name === 'posts_likes'){
+        echo $metric ? $metric : 0;
+    }
 }
