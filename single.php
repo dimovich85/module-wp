@@ -9,6 +9,7 @@
     <?php
       if( have_posts() ):
         while( have_posts() ): the_post();
+        $likes = get_post_meta($id, 'si_likes', true);
     ?>
     <article class="main-article wrapper">
       <header class="main-article__header">
@@ -24,7 +25,7 @@
         </time>
         <a href="#" class="main-article__like like">
           <span class="like__text">Нравится </span>
-          <span class="like__count">46</span>
+          <span class="like__count"><?php echo $likes ? $likes : 0; ?></span>
         </a>
       </footer>
     </article>

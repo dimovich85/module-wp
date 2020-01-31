@@ -19,6 +19,7 @@ add_action('after_setup_theme', 'sport_setup');
 add_action('widgets_init', 'sport_widgets');
 add_action('init', 'sport_registration');
 add_action( 'admin_init', 'sport_settings_fields' );
+add_action('add_meta_boxes', 'sport_add_likes_box');
 
 add_shortcode( 'si_paste_link', 'sport_paste_link' );
 
@@ -306,6 +307,12 @@ function sport_registration(){
         'supports'            => array('title'),
         'has_archive' => true
     ]);
+
+    register_post_meta('post', 'si_likes', [
+        'sanitize_callback' => 'wp_unslash',
+        'type' => 'integer',
+        'single' => true
+    ]);
 }
 
 function _img_url($path){
@@ -377,3 +384,20 @@ function si_settings_field_slogan_cb(){
         value="<?php echo get_option( 'si_settings_field_slogan' ); ?>"
     >
 <?php }
+
+function sport_add_likes_box(){
+    $screens = ['post'];
+	add_meta_box( 
+        'si_likes', 
+        'Likes: ', 
+        'si_likes_box_cb', 
+        $screens 
+    );
+}
+
+function si_likes_box_cb($post_obj){
+    $meta = get_post_meta($post_obj->ID, 'si_likes', true);
+    $likes = $meta ? $meta : 0;
+    $str = '<p>Эта статья понравилась: ' . $likes;
+    echo $str . '</p>';
+}
