@@ -20,6 +20,8 @@ add_action('widgets_init', 'sport_widgets');
 add_action('init', 'sport_registration');
 add_action( 'admin_init', 'sport_settings_fields' );
 add_action('add_meta_boxes', 'sport_add_likes_box');
+add_action('wp_ajax_metrics', 'si_post_metrics');
+add_action('wp_ajax_nopriv_metrics', 'si_post_metrics');
 
 add_shortcode( 'si_paste_link', 'sport_paste_link' );
 
@@ -400,4 +402,19 @@ function si_likes_box_cb($post_obj){
     $likes = $meta ? $meta : 0;
     $str = '<p>Эта статья понравилась: ' . $likes;
     echo $str . '</p>';
+}
+
+function si_post_metrics(){
+    $id = $_POST['id'];
+    $type = $_POST['do'];
+    $current_metrics = get_post_meta($id, 'si_likes', true);
+    if( $type === 'minus' ){
+        $current_metrics--;
+    } else {
+        $current_metrics++;
+    }
+    $res = update_post_meta($id, 'si_likes', $current_metrics);
+    if( $res ) echo $current_metrics;
+    else status_header(500, 'Данные не были обновлены. Попробуйте еще раз.');
+    wp_die();
 }
