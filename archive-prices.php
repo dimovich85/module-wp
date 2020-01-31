@@ -8,63 +8,49 @@
       ?>
         <section class="prices">
           <h2 class="main-heading prices__h">Цены</h2>
+          <?php
+            $prices = get_posts([
+              'post_type'   => 'prices',
+              'numberposts' => -1,
+              'meta_key' => 'prices_show',
+              'meta_value' => '1'
+            ]);
+            foreach( $prices as $price ):
+              $price_trs = explode("\n", get_fields($price->ID)['prices_table']);
+              $price_head = $price_trs[0]; 
+          ?>
           <table>
-            <thead>
+          <thead>
               <tr>
-                <td>Услуга</td>
-                <td>Разовая покупка</td>
-                <td>1 месяц</td>
-                <td>6 месяцев</td>
-                <td>12 месяцев</td>
+              <?php
+                $head_tds = explode("|", $price_head);
+                foreach( $head_tds as $td):
+              ?>
+                <td><?php echo $td; ?></td>
+              <?php endforeach; ?>
               </tr>
             </thead>
             <tbody>
+            <?php
+              $index = 0;
+              foreach( $price_trs as $tr ):
+                if( $index === 0 ){
+                  $index++;
+                  continue;
+                }
+            ?>
               <tr>
-                <td> Фитнес </td>
-                <td> 200 <span> р.- </span>
-                </td>
-                <td> 900 <span> р.- </span>
-                </td>
-                <td> 4800 <span> р.- </span>
-                </td>
-                <td> 9000 <span> р.- </span>
-                </td>
+              <?php
+                $body_tds = explode("|", $tr);
+                foreach( $body_tds as $td ):
+              ?>
+                <td> <?php echo $td; ?> </td>
+              <?php endforeach; ?>
               </tr>
-              <tr>
-                <td> Тренажерный зал </td>
-                <td> 200 <span> р.- </span>
-                </td>
-                <td> 900 <span> р.- </span>
-                </td>
-                <td> 4800 <span> р.- </span>
-                </td>
-                <td> 9000 <span> р.- </span>
-                </td>
-              </tr>
-              <tr>
-                <td> Женский фитнес </td>
-                <td> 200 <span> р.- </span>
-                </td>
-                <td> 1100 <span> р.- </span>
-                </td>
-                <td> 6000 <span> р.- </span>
-                </td>
-                <td> 11000 <span> р.- </span>
-                </td>
-              </tr>
-              <tr>
-                <td> Бокс </td>
-                <td> 200 <span> р.- </span>
-                </td>
-                <td> 900 <span> р.- </span>
-                </td>
-                <td> 4800 <span> р.- </span>
-                </td>
-                <td> 9000 <span> р.- </span>
-                </td>
-              </tr>
+            <?php $index++; endforeach; ?>
             </tbody>
           </table>
+          <?php endforeach; ?>
         </section>
         <?php
           $cards = get_posts([
