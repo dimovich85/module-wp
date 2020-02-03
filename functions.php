@@ -19,10 +19,13 @@ add_action('after_setup_theme', 'sport_setup');
 add_action('widgets_init', 'sport_widgets');
 add_action('init', 'sport_registration');
 add_action( 'admin_init', 'sport_settings_fields' );
-add_action('add_meta_boxes', 'sport_add_likes_box');
+add_action('add_meta_boxes', 'sport_add_boxes');
 add_action('wp_ajax_metrics', 'si_post_metrics');
 add_action('wp_ajax_nopriv_metrics', 'si_post_metrics');
+add_action( 'admin_post_nopriv_si-modal-form', 'si_modal_form_controller' );
+add_action( 'admin_post_si-modal-form', 'si_modal_form_controller' );
 add_action('manage_posts_custom_column', 'si_column_views',5,2);
+add_action( 'save_post', 'si_modal_form_save_post' );
 
 add_shortcode( 'si_paste_link', 'sport_paste_link' );
 
@@ -337,24 +340,6 @@ function sport_registration(){
         'has_archive' => false
     ]);
 
-    register_taxonomy('orders-status', ['orders'], [
-        'labels'                => [
-            'name'              => 'Статус заявки',
-            'singular_name'     => 'Статус заявки',
-            'search_items'      => 'Найти статус заявки',
-            'all_items'         => 'Все статусы заявок',
-            'view_item '        => 'Посмотреть статус заявки',
-            'edit_item'         => 'Редактировать статус заявки',
-            'update_item'       => 'Обновить статус заявки',
-            'add_new_item'      => 'Добавить статус заявки',
-            'new_item_name'     => 'Добавить статус заявки',
-            'menu_name'         => 'Все статусы заявок',
-        ],
-        'description'           => '',
-        'public'                => true,
-        'hierarchical'          => true
-    ]);
-
     register_post_meta('post', 'si_likes', [
         'sanitize_callback' => 'wp_unslash',
         'type' => 'integer',
@@ -432,7 +417,7 @@ function si_settings_field_slogan_cb(){
     >
 <?php }
 
-function sport_add_likes_box(){
+function sport_add_boxes(){
     $screens = ['post'];
 	add_meta_box( 
         'si_likes', 
@@ -440,6 +425,73 @@ function sport_add_likes_box(){
         'si_likes_box_cb', 
         $screens 
     );
+    add_meta_box(
+        'si_modal_form_data_date',
+        'Заявка получена: ',
+        'si_modal_form_data_cb_date',
+        ['orders']
+    );
+    add_meta_box(
+        'si_modal_form_data_name',
+        'Имя: ',
+        'si_modal_form_data_cb_name',
+        ['orders']
+    );
+    add_meta_box(
+        'si_modal_form_data_phone',
+        'Телефон: ',
+        'si_modal_form_data_cb_phone',
+        ['orders']
+    );
+    add_meta_box(
+        'si_modal_form_data_choose',
+        'Пользовательский выбор: ',
+        'si_modal_form_data_cb_choose',
+        ['orders']
+    );
+    add_meta_box(
+        'si_modal_form_data_status',
+        'Заявка обработана: ',
+        'si_modal_form_data_cb_status',
+        ['orders']
+    );
+}
+
+function si_modal_form_data_cb_date($post_obj){
+    $date = $post_obj->post_date;
+    echo '<p>' . $date .'</p>';
+}
+
+function si_modal_form_data_cb_name($post_obj){
+    $name = get_post_meta( $post_obj->ID, 'si-modal-form-name', true);
+    $name = $name ? $name : 'Нет данных';
+    echo '<p>' . $name .'</p>';
+}
+
+function si_modal_form_data_cb_phone($post_obj){
+    $phone = get_post_meta( $post_obj->ID, 'si-modal-form-phone', true);
+    $phone = $phone ? $phone : 'Нет данных';
+    echo '<p>' . $phone .'</p>';
+}
+
+function si_modal_form_data_cb_choose($post_obj){
+    $choose = get_post_meta( $post_obj->ID, 'si-modal-form-choose', true);
+    $output = '';
+    if( $choose ){
+        $post = get_post($choose);
+        $title = $post->post_title;
+        $type = $post->post_type;
+        $output = 'Пользователь выбрал - <strong>' . $title . '.</strong> Это из раздела: <strong>' . $type . '</strong>';
+    } else{
+        $output = 'Добавлена админом';
+    }
+    echo '<p>' . $output .'</p>';
+}
+
+function si_modal_form_data_cb_status($post_obj){
+    $status = get_post_meta( $post_obj->ID, 'si-modal-form-status', true);
+    $checked = $status === 'order-done' ? 'checked' : '';
+    echo '<p><label>Заявка обработана: <input type="checkbox" name="si-modal-form-status"'.$checked.'></label></p><input type="hidden" name="si-modal-form-status-flag" value="si-sent">';
 }
 
 function si_likes_box_cb($post_obj){
@@ -473,5 +525,38 @@ function si_column_views($col_name, $id){
     $metric = get_post_meta( $id, 'si_likes', true);
     if($col_name === 'posts_likes'){
         echo $metric ? $metric : 0;
+    }
+}
+
+function si_modal_form_controller(){
+    $name = wp_strip_all_tags($_POST['si-user-name']);
+    $phone = wp_strip_all_tags($_POST['si-user-phone']);
+    $choose = wp_strip_all_tags($_POST['form-post-id']);
+    $id = wp_insert_post( wp_slash([
+        'post_title' => 'Новая заявка',
+        'post_type' => 'orders',
+        'post_status' => 'publish',
+        'meta_input' => [
+            'si-modal-form-name' => $name,
+            'si-modal-form-phone' => $phone,
+            'si-modal-form-choose' => $choose,
+            'si-modal-form-status' => 'new-order'
+        ]
+    ]));
+    if( $id !== 0 ){
+        wp_update_post([
+            'ID' => $id,
+            'post_title' => 'Новая заявка #' . $id
+        ]);
+    }
+    header('Location: ' . home_url());
+}
+
+function si_modal_form_save_post( $post_id ){
+    if( !isset($_POST['si-modal-form-status-flag']) ) return;
+    if( isset($_POST['si-modal-form-status']) ){
+        update_post_meta($post_id, 'si-modal-form-status', 'order-done');
+    } else{
+        update_post_meta($post_id, 'si-modal-form-status', 'new-order');
     }
 }
