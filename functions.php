@@ -312,6 +312,49 @@ function sport_registration(){
         'has_archive' => true
     ]);
 
+    register_post_type('orders', [
+        'labels' => [
+            'name'               => 'Заявки', // основное название для типа записи
+            'singular_name'      => 'Заявка', // название для одной записи этого типа
+            'add_new'            => 'Добавить новую заявку', // для добавления новой записи
+            'add_new_item'       => 'Добавить новую заявку', // заголовка у вновь создаваемой записи в админ-панели.
+            'edit_item'          => 'Редактироваую заявку', // для редактирования типа записи
+            'new_item'           => 'Новую заявку', // текст новой записи
+            'view_item'          => 'Смотреть заявку', // для просмотра записи этого типа.
+            'search_items'       => 'Искать', // для поиска по этим типам записи
+            'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+            'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+            'parent_item_colon'  => '', // для родителей (у древовидных типов)
+            'menu_name'          => 'Заявки', // название меню
+        ],
+        'public'              => false,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'menu_position'       => 20,
+        'menu_icon'           => 'dashicons-format-aside', 
+        'hierarchical'        => false,
+        'supports'            => array('title'),
+        'has_archive' => false
+    ]);
+
+    register_taxonomy('orders-status', ['orders'], [
+        'labels'                => [
+            'name'              => 'Статус заявки',
+            'singular_name'     => 'Статус заявки',
+            'search_items'      => 'Найти статус заявки',
+            'all_items'         => 'Все статусы заявок',
+            'view_item '        => 'Посмотреть статус заявки',
+            'edit_item'         => 'Редактировать статус заявки',
+            'update_item'       => 'Обновить статус заявки',
+            'add_new_item'      => 'Добавить статус заявки',
+            'new_item_name'     => 'Добавить статус заявки',
+            'menu_name'         => 'Все статусы заявок',
+        ],
+        'description'           => '',
+        'public'                => true,
+        'hierarchical'          => true
+    ]);
+
     register_post_meta('post', 'si_likes', [
         'sanitize_callback' => 'wp_unslash',
         'type' => 'integer',
