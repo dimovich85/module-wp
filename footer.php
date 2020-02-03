@@ -3,9 +3,25 @@
     <button class="modal__closer">
       <span class="sr-only">Закрыть</span>
     </button>
-    <section class="modal-content" id="modal-form">
-      <h2 class="modal-content__h"> Modal </h2>
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum labore aut, necessitatibus possimus eligendi. Molestiae dolore consectetur eveniet sit doloremque blanditiis cumque recusandae pariatur cum est tenetur nemo nostrum unde, architecto praesentium necessitatibus, repellendus eos voluptatibus quam. Iusto eaque eligendi inventore sunt voluptas deleniti enim quae, nobis tempora, cum atque ab aspernatur at eius ipsam beatae iure corporis veritatis ducimus, qui sed. Necessitatibus eaque quis, numquam. Aliquam animi ipsum autem repellat incidunt dolorem qui, dignissimos ullam nisi, numquam, nam excepturi quam voluptas. Molestias, nobis quos dicta unde quod. Quos harum atque fugit nihil totam, alias sapiente officia cumque obcaecati ipsam. </p>
+    <section class="modal-content modal-form" id="modal-form">
+      <form method="POST" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" class="modal-form__form">
+        <h2 class="modal-content__h"> Отправить заявку </h2>
+        <p> Оставьте свои контакты и менеджер с Вами свяжется </p>
+        <p>
+          <label>
+            <span class="sr-only">Имя: </span>
+            <input type="text" name="si-user-name" placeholder="Имя">
+          </label>
+        </p>
+        <p>
+          <label>
+            <span class="sr-only">Телефон:</span>
+            <input type="text" name="si-user-phone" placeholder="Телефон">
+          </label>
+        </p>
+        <button class="btn" type="submit">Отправить</button>
+        <input type="hidden" name="action" value="si-modal-form">
+      </form>
     </section>
   </div>
 </div>
