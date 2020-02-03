@@ -28,7 +28,7 @@
                   <?php the_field('trainer_description'); ?>
                   </p>
                 </div>
-                <a href="#" class="trainer__subscribe btn">записаться</a>
+                <a data-post-id="<?php echo $id; ?>" href="#modal-form" class="trainer__subscribe btn btn_modal">записаться</a>
               </article>
             </li>
           <?php endwhile; ?>

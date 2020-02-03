@@ -99,7 +99,7 @@
                   </li>
                   <?php endforeach; ?>
                 </ul>
-                <a href="#" class="card__buy btn">купить</a>
+                <a data-post-id="<?php echo $id; ?>" href="#modal-form" class="card__buy btn btn_modal">купить</a>
               </li>
             <?php
               endforeach;
@@ -109,50 +109,6 @@
           </div>
         </section>
         <?php endif; ?>
-        <!-- <section class="cards">
-          <h2 class="page-heading cards__h"> клубные карты </h2>
-          <ul class="cards__list row">
-            <li class="card">
-              <h3 class="card__name"> полный день </h3>
-              <p class="card__time"> 7:00 &ndash; 22:00 </p>
-              <p class="card__price price"> 3200 <span class="price__unit">р.-/мес.</span>
-              </p>
-              <ul class="card__features">
-                <li class="card__feature">Безлимит посещений клуба</li>
-                <li class="card__feature">Вводный инструктаж</li>
-                <li class="card__feature">Групповые занятия</li>
-                <li class="card__feature">Сауна</li>
-              </ul>
-              <a href="#" class="card__buy btn">купить</a>
-            </li>
-            <li class="card card_profitable">
-              <h3 class="card__name"> полный день </h3>
-              <p class="card__time"> 7:00 &ndash; 22:00 </p>
-              <p class="card__price price"> 3200 <span class="price__unit">р.-/мес.</span>
-              </p>
-              <ul class="card__features">
-                <li class="card__feature">Безлимит посещений клуба</li>
-                <li class="card__feature">Вводный инструктаж</li>
-                <li class="card__feature">Групповые занятия</li>
-                <li class="card__feature">Сауна</li>
-              </ul>
-              <a href="#" class="card__buy btn">купить</a>
-            </li>
-            <li class="card">
-              <h3 class="card__name"> полный день </h3>
-              <p class="card__time"> 7:00 &ndash; 22:00 </p>
-              <p class="card__price price"> 3200 <span class=" price__unit">р.-/мес.</span>
-              </p>
-              <ul class="card__features">
-                <li class="card__feature">Безлимит посещений клуба</li>
-                <li class="card__feature">Вводный инструктаж</li>
-                <li class="card__feature">Групповые занятия</li>
-                <li class="card__feature">Сауна</li>
-              </ul>
-              <a href="#" class="card__buy btn">купить</a>
-            </li>
-          </ul>
-        </section> -->
       </div>
     </main>
 
