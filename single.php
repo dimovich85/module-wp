@@ -37,13 +37,26 @@
     <script>
       window.addEventListener('load', function(){
         const likeBtn = document.querySelector('.like');
-        let isLiked = Boolean(+localStorage.getItem('liked'));
+        const pageId = likeBtn.getAttribute('data-id');
+        if( !localStorage.getItem('liked') ){
+          localStorage.setItem('liked', '');
+        }
+        function getAboutLike(id){
+          let isLiked = false;
+          try{
+            isLiked = localStorage.getItem('liked').split(',').includes(id);
+          } catch(e){
+            console.log(e);
+          }
+          return isLiked;
+        }
+        let isLiked = getAboutLike(pageId);
         if( isLiked === true ){
           likeBtn.classList.add('like_liked');
         }
         likeBtn.addEventListener('click', function(e){
           e.preventDefault();
-          let isLiked = Boolean(+localStorage.getItem('liked'));
+          let isLiked = getAboutLike(pageId);
           const target = this;
           const data = new FormData();
           data.append('action', 'metrics');
@@ -57,7 +70,18 @@
             if( xhr.readyState !== 4 ) return;
             if( xhr.status === 200 ){
               target.querySelector('.like__count').innerText = xhr.responseText;
-              localStorage.setItem('liked', isLiked ? 0 : 1);
+              let localData = localStorage.getItem('liked');
+              let newData = '';
+              if( isLiked ){
+                newData = localData.split(',')
+                                  .filter( id => id !== pageId )
+                                  .join(',');
+              } else {
+                newData = localData.split(',').filter(el => el !== '');
+                newData.push(pageId);
+                newData = newData.join(',');
+              }
+              localStorage.setItem('liked', newData);
               likeBtn.classList.toggle('like_liked');
             } else{
               console.log( xhr.statusText );
