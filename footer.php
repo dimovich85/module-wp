@@ -16,7 +16,12 @@
         <p>
           <label>
             <span class="sr-only">Телефон:</span>
-            <input type="text" name="si-user-phone" placeholder="Телефон">
+            <input 
+              type="text" 
+              name="si-user-phone" 
+              placeholder="Телефон"
+              pattern="^\+{0,1}[0-9]{4,}$"
+            >
           </label>
         </p>
         <button class="btn" type="submit">Отправить</button>
