@@ -1,9 +1,9 @@
 <div class="modal">
   <div class="wrapper">
-    <button class="modal__closer">
-      <span class="sr-only">Закрыть</span>
-    </button>
     <section class="modal-content modal-form" id="modal-form">
+      <button class="modal__closer">
+        <span class="sr-only">Закрыть</span>
+      </button>
       <form method="POST" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" class="modal-form__form">
         <h2 class="modal-content__h"> Отправить заявку </h2>
         <p> Оставьте свои контакты и менеджер с Вами свяжется </p>
