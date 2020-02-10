@@ -87,7 +87,7 @@
                 </p>
                 <p class="card__price price">
                   <?php the_field('cards_price'); ?>
-                  <span class="price__unit">р.-/мес.</span>
+                  <span class="price__unit" aria-label="рублей в месяц">р.-/мес.</span>
                 </p>
                 <ul class="card__features">
                 <?php
