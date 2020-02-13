@@ -34,9 +34,9 @@ add_filter('widget_text', 'do_shortcode');
 add_filter('manage_posts_columns', 'si_add_column_views');
 
 function sport_scripts(){
-    wp_enqueue_style('styles', get_template_directory_uri() . '/assets/css/styles.css', [], '1.0.0', 'all');
+    wp_enqueue_style('styles', get_template_directory_uri() . '/assets/css/styles.css', [], '1.3.0', 'all');
 
-    wp_enqueue_script('js', get_template_directory_uri() . '/assets/js/js.js', [], '1.0', true);
+    wp_enqueue_script('js', get_template_directory_uri() . '/assets/js/js.js', [], '1.3', true);
 }
 
 function sport_setup(){
