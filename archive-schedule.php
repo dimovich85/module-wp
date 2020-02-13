@@ -69,7 +69,7 @@
                 <li class="schedule__item">
                   <p class="schedule__time"> <?php echo $time; ?> </p>
                   <h3 class="schedule__h"> <?php echo $title; ?> </h3>
-                  <p class="schedule__trainer"> с <?php echo $trainer; ?> </p>
+                  <p class="schedule__trainer"><?php echo $trainer; ?></p>
                   <p 
                     class="schedule__place" 
                     style="color: <?php echo $place_color; ?>;"
