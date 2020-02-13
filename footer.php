@@ -64,7 +64,7 @@
           <div class="main-footer__widget main-footer__widget_copyright">
             <span class="widget-text"> 
               © <?php 
-                  echo date("Y");
+                  echo date("Y") . ' ';
                   if( is_active_sidebar('footer_column1') ){
                     dynamic_sidebar('footer_column1');
                   }

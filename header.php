@@ -7,12 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,800,900&display=swap&subset=cyrillic" rel="preload stylesheet">
     <?php wp_head(); ?>
   </head>
-  <?php 
-    // $classes = get_body_class();
-    // if( !is_front_page() ){
-    //   array_push($classes, 'inner');
-    // }
-    //$class_str = join(' ', $classes);
+  <?php
     $class_str = '';
     if( !is_front_page() ){
       $class_str = 'inner';
@@ -40,5 +35,8 @@
             }
           ?>
         </div>
+        <button class="main-header__mobile">
+          <span class="sr-only">Открыть мобильное меню</span>
+        </button>
       </div>
     </header>
